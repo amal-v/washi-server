@@ -1,8 +1,7 @@
 package main
 
-import "./cmd/root"
+import "./cmd"
 
 func main() {
-	root.Execute()
-
+	cmd.Execute()
 }
