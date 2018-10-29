@@ -1,18 +1,15 @@
 package cmd
 
 import (
-	"fmt"
+	"net/http"
 
-	"github.com/spf13/viper"
+	"washi/api"
 
 	"github.com/spf13/cobra"
 )
 
 func init() {
-	var region int16
 	rootCmd.AddCommand(serve)
-	serve.Flags().Int16VarP(&region, "PORT", "P", 3000, "Server PORT (Optional)")
-	viper.BindPFlag("PORT", serve.Flags().Lookup("PORT"))
 
 }
 
@@ -21,7 +18,6 @@ var serve = &cobra.Command{
 	Short: "Start Server",
 	Long:  `Can be used to start server at a particular PORT Eg serve --PORT 3000`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(viper.GetString("PORT"))
-
+		http.ListenAndServe(":3000", api.Router())
 	},
 }
